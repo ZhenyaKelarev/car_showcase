@@ -7,8 +7,8 @@ import Image from "next/image";
 import { Fragment, useState } from "react";
 
 const SearchManufacturer = ({
-  manufacturer,
-  setManufacturer,
+  selected,
+  setSelected,
 }: SearchManufacturerProps) => {
   const [query, setQuery] = useState("");
 
@@ -19,12 +19,12 @@ const SearchManufacturer = ({
           item
             .toLowerCase()
             .replace(/\s+/g, "")
-            .includes(query.toLowerCase().replace(/\s+/g, ""))
+            .includes(query.toLowerCase().replace(/\s+/g, "")),
         );
 
   return (
     <div className="search-manufacturer">
-      <Combobox value={manufacturer} onChange={setManufacturer}>
+      <Combobox value={selected} onChange={setSelected}>
         <div className="relative w-full">
           <Combobox.Button className="absolute top-[14px]">
             <Image
@@ -54,7 +54,7 @@ const SearchManufacturer = ({
                 <Combobox.Option
                   key={item}
                   className={({ active }) => `
-										relative search-manufacturer__option ${
+										search-manufacturer__option relative ${
                       active ? "bg-primary-blue text-white" : "text-gray-900"
                     }`}
                   value={item}
